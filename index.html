@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kutubxona</title>
+    <link rel="stylesheet" href="styles.css">
+    
+</head>
+<body>
+    <header>
+        
+        <div class="search">
+           sKutubxona<input type="text" id="search" placeholder="Kitobni qidirish...">
+        <button onclick="searchBooks()" >Qidirish</button></div>
+    </header>
+    <main>
+        <div id="books"></div>
+    </main>
+    <script>
+        const books = [
+        {
+            "title": "Alibaba. Jek Ma bunyod etgan maskan",
+            "author": "Dunkan Klark",
+            "year": 2018,
+            "file": "files/alibaba_jek_ma_bunyod_etgan_maskan.pdf",
+            "image": "images/alibaba_jek_ma_bunyod_etgan_maskan.jpg"
+        },
+        {
+            "title": "Noldan boshlangan biznes",
+            "author": "Erik Ris",
+            "year": 2000,
+            "file": "files/noldan_boshlangan_biznes.pdf",
+            "image": "images/noldan_boshlangan_biznes.jpg"
+        },
+        {
+            "title": "Alif",
+            "author": "Paulo Koelo",
+            "year": 1988,
+            "file": "files/alif.pdf",
+            "image": "images/alif.jpg"
+        },
+        {
+            "title": "Abdulhamidxon",
+            "author": "Talha Ugurluel",
+            "year": 2018,
+            "file": "files/abdulhamidxon.pdf",
+            "image": "images/abdulhamidxon.jpg"
+        },
+        {
+            "title": "Ahmad Lutfiy Qozonchi eng asarlari",
+            "author": "Ahmad Lutfiy Qozonchi",
+            "year": "various",
+            "file": "files/ahmad_lutfiy_qozonchi_eng_asarlari.pdf",
+            "image": "images/ahmad_lutfiy_qozonchi_eng_asarlari.jpg"
+        },
+        {
+            "title": "Ahmoqlik qilmang",
+            "author": "Jen Sinsero",
+            "year": 2015,
+            "file": "files/ahmoqlik_qilmang.pdf",
+            "image": "images/ahmoqlik_qilmang.jpg"
+        },
+        {
+            "title": "Alkimyogar",
+            "author": "Paulo Koelo",
+            "year": 1988,
+            "file": "files/alkimyogar.pdf",
+            "image": "images/alkimyogar.jpg"
+        },
+        {
+            "title": "Anbiyolar qissasi",
+            "author": "Shayx Muhammad Sodiq Muhammad Yusuf",
+            "year": "various",
+            "file": "files/anbiyolar_qissasi.pdf",
+            "image": "images/anbiyolar_qissasi.jpg"
+        },
+        {
+            "title": "Artur Konan Doyl eng Sara asarlari",
+            "author": "Artur Konan Doyl",
+            "year": "various",
+            "file": "files/artur_konan_doyl_eng_sara_asarlari.pdf",
+            "image": "images/artur_konan_doyl_eng_sara_asarlari.jpg"
+        },
+        {
+            "title": "Alvido bolalik",
+            "author": "T. Malik",
+            "year": "various",
+            "file": "files/alvido_bolalik.pdf",
+            "image": "images/alvido_bolalik.jpg"
+        },
+        {
+            "title": "Badoe us-sanoe 1",
+            "author": "Alouddin Kosoniy",
+            "year": "various",
+            "file": "files/badoe_us_sanoe_1.pdf",
+            "image": "images/badoe_us_sanoe_1.jpg"
+        },
+        {
+            "title": "Badoe us-sanoe 2",
+            "author": "Alouddin Kosoniy",
+            "year": "various",
+            "file": "files/badoe_us_sanoe_2.pdf",
+            "image": "images/badoe_us_sanoe_2.jpg"
+        },
+        {
+            "title": "Bahouddin Naqshband",
+            "author": "To'lqin Hayit",
+            "year": 1990,
+            "file": "files/bahouddin_naqshband.pdf",
+            "image": "images/bahouddin_naqshband.jpg"
+        },
+        {
+            "title": "Baxt qasri",
+            "author": "Zuxrahon Hamdamova",
+            "year": 2019,
+            "file": "files/baxt_qasri.pdf",
+            "image": "images/baxt_qasri.jpg"
+        },
+        {
+            "title": "Baxt ulashing",
+            "author": "Hasan Shamsiy",
+            "year": 2005,
+            "file": "files/baxt_ulashing.pdf",
+            "image": "images/baxt_ulashing.jpg"
+        },
+        {
+            "title": "Bir vijdon uyg'onur",
+            "author": "A. L. Qozonchi",
+            "year": "various",
+            "file": "files/bir_vijdon_uygonur.pdf",
+            "image": "images/bir_vijdon_uygonur.jpg"
+        },
+        {
+            "title": "Biz g'alaba qozonamiz",
+            "author": "Shuxrat Sattorov",
+            "year": 2010,
+            "file": "files/biz_galaba_qozonamiz.pdf",
+            "image": "images/biz_galaba_qozonamiz.jpg"
+        },
+        {
+            "title": "Boburnoma",
+            "author": "Z. M. Bobur",
+            "year": "16th century",
+            "file": "files/boburnoma.pdf",
+            "image": "images/boburnoma.jpg"
+        },
+        {
+            "title": "Bodo Shefer eng sara asarlari",
+            "author": "Bodo Shefer",
+            "year": "various",
+            "file": "files/bodo_shefer_eng_sara_asarlari.pdf",
+            "image": "images/bodo_shefer_eng_sara_asarlari.jpg"
+        },
+        {
+            "title": "Boy ota, Kambag'al ota",
+            "author": "R. T. Kiyosaki",
+            "year": 2020,
+            "file": "files/boy_ota_kambagal_ota.pdf",
+            "image": "images/boy_ota_kambagal_ota.jpg"
+        },
+        {
+            "title": "Bola odobi bilan aziz",
+            "author": "Z. Rahim",
+            "year": "various",
+            "file": "files/bola_odobi_bilan_aziz.pdf",
+            "image": "images/bola_odobi_bilan_aziz.jpg"
+        },
+        {
+            "title": "Cho'qintirgan ota",
+            "author": "Mario Pyuzo",
+            "year": 1969,
+            "file": "files/choqintirgan_ota.pdf",
+            "image": "images/choqintirgan_ota.jpg"
+        },
+        {
+            "title": "Daftar hoshiyasidagi bitiklar",
+            "author": "O'. Hoshimov",
+            "year": "various",
+            "file": "files/daftar_hoshiyasidagi_bitiklar.pdf",
+            "image": "images/daftar_hoshiyasidagi_bitiklar.jpg"
+        },
+        {
+            "title": "Diqqat",
+            "author": "Kel Nyuport",
+            "year": 2016,
+            "file": "files/diqqat.pdf",
+            "image": "images/diqqat.jpg"
+        },
+        {
+            "title": "Dunyoning ishlari",
+            "author": "O'. Hoshimov",
+            "year": "various",
+            "file": "files/dunyoning_ishlari.pdf",
+            "image": "images/dunyoning_ishlari.jpg"
+        },
+        {
+            "title": "Dunyoni tebratgan 7 buyuklar",
+            "author": "various",
+            "year": "various",
+            "file": "files/dunyoni_tebratgan_7_buyuklar.pdf",
+            "image": "images/dunyoni_tebratgan_7_buyuklar.jpg"
+        },
+        {
+            "title": "Ey Farzand",
+            "author": "Imom G'azzoliy",
+            "year": "various",
+            "file": "files/ey_farzand.pdf",
+            "image": "images/ey_farzand.jpg"
+        },
+        {
+            "title": "Graf Monte Cristo 1",
+            "author": "Aleksandr Dyuma",
+            "year": 1844,
+            "file": "files/graf_monte_cristo_1.pdf",
+            "image": "images/graf_monte_cristo_1.jpg"
+        },
+        {
+            "title": "Graf Monte Cristo 2",
+            "author": "Aleksandr Dyuma",
+            "year": 1844,
+            "file": "files/graf_monte_cristo_2.pdf",
+            "image": "images/graf_monte_cristo_2.jpg"
+        },
+        { "title": "Paulo Koelo",
+            "year": 1988,
+            "file": "files/alif.pdf",
+            "image": "images/alif.jpg"
+        },
+        {
+            "title": "Abdulhamidxon",
+            "author": "Talha Ugurluel",
+            "year": 2018,
+            "file": "files/abdulhamidxon.pdf",
+            "image": "images/abdulhamidxon.jpg"
+        },
+        {
+            "title": "Ahmad Lutfiy Qozonchi eng asarlari",
+            "author": "Ahmad Lutfiy Qozonchi",
+            "year": "various",
+            "file": "files/ahmad_lutfiy_qozonchi_eng_asarlari.pdf",
+            "image": "images/ahmad_lutfiy_qozonchi_eng_asarlari.jpg"
+        },
+        {
+            "title": "Ahmoqlik qilmang",
+            "author": "Jen Sinsero",
+            "year": 2015,
+            "file": "files/ahmoqlik_qilmang.pdf",
+            "image": "images/ahmoqlik_qilmang.jpg"
+        },
+        {
+            "title": "Alkimyogar",
+            "author": "Paulo Koelo",
+            "year": 1988,
+            "file": "files/alkimyogar.pdf",
+            "image": "images/alkimyogar.jpg"
+        },
+        {
+            "title": "Anbiyolar qissasi",
+            "author": "Shayx Muhammad Sodiq Muhammad Yusuf",
+            "year": "various",
+            "file": "files/anbiyolar_qissasi.pdf",
+            "image": "images/anbiyolar_qissasi.jpg"
+        },
+        {
+            "title": "Artur Konan Doyl eng Sara asarlari",
+            "author": "Artur Konan Doyl",
+            "year": "various",
+            "file": "files/artur_konan_doyl_eng_sara_asarlari.pdf",
+            "image": "images/artur_konan_doyl_eng_sara_asarlari.jpg"
+        },
+        {
+            "title": "Alvido bolalik",
+            "author": "T. Malik",
+            "year": "various",
+            "file": "files/alvido_bolalik.pdf",
+            "image": "images/alvido_bolalik.jpg"
+        },
+        {
+            "title": "Badoe us-sanoe 1",
+            "author": "Alouddin Kosoniy",
+            "year": "various",
+            "file": "files/badoe_us-sanoe_1.pdf",
+            "image": "images/badoe_us-sanoe_1.jpg"
+        },
+        {
+            "title": "Badoe us-sanoe 2",
+            "author": "Alouddin Kosoniy",
+            "year": "various",
+            "file": "files/badoe_us-sanoe_2.pdf",
+            "image": "images/badoe_us-sanoe_2.jpg"
+        },
+        {
+            "title": "Bahouddin Naqshband",
+            "author": "To'lqin Hayit",
+            "year": 1990,
+            "file": "files/bahouddin_naqshband.pdf",
+            "image": "images/bahouddin_naqshband.jpg"
+        },
+        {
+            "title": "Baxt qasri",
+            "author": "Zuxrahon Hamdamova",
+            "year": 2019,
+            "file": "files/baxt_qasri.pdf",
+            "image": "images/baxt_qasri.jpg"
+        },
+        {
+            "title": "Baxt ulashing",
+            "author": "Hasan Shamsiy",
+            "year": 2005,
+            "file": "files/baxt_ulashing.pdf",
+            "image": "images/baxt_ulashing.jpg"
+        },
+        {
+            "title": "Bir vijdon uyg'onur",
+            "author": "A. L. Qozonchi",
+            "year": "various",
+            "file": "files/bir_vijdon_uyg'onur.pdf",
+            "image": "images/bir_vijdon_uyg'onur.jpg"
+        },
+        {
+            "title": "Biz g'alaba qozonamiz",
+            "author": "Shuxrat Sattorov",
+            "year": 2010,
+            "file": "files/biz_g'alaba_qozonamiz.pdf",
+            "image": "images/biz_g'alaba_qozonamiz.jpg"
+        },
+        {
+            "title": "Boburnoma",
+            "author": "Z. M. Bobur",
+            "year": "16th century",
+            "file": "files/boburnoma.pdf",
+            "image": "images/boburnoma.jpg"
+        },
+        {
+            "title": "Bodo Shefer eng sara asarlari",
+            "author": "Bodo Shefer",
+            "year": "various",
+            "file": "files/bodo_shefer_eng_sara_asarlari.pdf",
+            "image": "images/bodo_shefer_eng_sara_asarlari.jpg"
+        },
+        {
+            "title": "Boy ota, Kambag'al ota",
+            "author": "R. T. Kiyosaki",
+            "year": 2020,
+            "file": "files/boy_ota_kambagal_ota.pdf",
+            "image": "images/boy_ota_kambagal_ota.jpg"
+        },
+        {
+            "title": "Bola odobi bilan aziz",
+            "author": "Z. Rahim",
+            "year": "various",
+            "file": "files/bola_odobi_bilan_aziz.pdf",
+            "image": "images/bola_odobi_bilan_aziz.jpg"
+        },
+        {
+            "title": "Cho'qintirgan ota",
+            "author": "Mario Pyuzo",
+            "year": 1969,
+            "file": "files/choqintirgan_ota.pdf",
+            "image": "images/choqintirgan_ota.jpg"
+        },
+        {
+            "title": "Daftar hoshiyasidagi bitiklar",
+            "author": "O'. Hoshimov",
+            "year": 2001,
+            "file": "files/daftar_hoshiyasidagi_bitiklar.pdf",
+            "image": "images/daftar_hoshiyasidagi_bitiklar.jpg"
+        },
+        {
+            "title": "Diqqat",
+            "author": "Kel Nyuport",
+            "year": 2016,
+            "file": "files/diqqat.pdf",
+            "image": "images/diqqat.jpg"
+        },
+        {
+            "title": "Dunyoning ishlari",
+            "author": "O'. Hoshimov",
+            "year": 2005,
+            "file": "files/dunyoning_ishlari.pdf",
+            "image": "images/dunyoning_ishlari.jpg"
+        },
+        {
+            "title": "Dunyoni tebratgan 7 buyuklar",
+            "author": "unknown",
+            "year": "various",
+            "file": "files/dunyoni_tebratgan_7_buyuklar.pdf",
+            "image": "images/dunyoni_tebratgan_7_buyuklar.jpg"
+        },
+        {
+            "title": "Ey Farzand",
+            "author": "Imom G'azzoliy",
+            "year": "various",
+            "file": "files/ey_farzand.pdf",
+            "image": "images/ey_farzand.jpg"
+        },
+        {
+            "title": "Graf Monte Cristo 1",
+            "author": "Aleksandr Dyuma",
+            "year": 1844,
+            "file": "files/graf_monte_cristo_1.pdf",
+            "image": "images/graf_monte_cristo_1.jpg"
+        },
+        {
+            "title": "Graf Monte Cristo 2",
+            "author": "Aleksandr Dyuma",
+            "year": 1844,
+            "file": "files/graf_monte_cristo_2.pdf",
+            "image": "images/graf_monte_cristo_2.jpg"
+        },
+        {
+            "title": "Halol luqma",
+            "author": "Rauf Jillasun",
+            "year": 2012,
+            "file": "files/halol_luqma.pdf",
+            "image": "images/halol_luqma.jpg"
+        },
+        {
+            "title": "Halqa",
+            "author": "Akrom Malik",
+            "year": 2017,
+            "file": "files/halqa.pdf",
+            "image": "images/halqa.jpg"
+        },
+        {
+            "title": "Hazrat Abu Bakr Siddiq",
+            "author": "A. L. Qozonchi",
+            "year": "various",
+            "file": "files/hazrat_abu_bakr_siddiq.pdf",
+            "image": "images/hazrat_abu_bakr_siddiq.jpg"
+        },
+        {
+            "title": "Hazrat Umar",
+            "author": "A. L. Qozonchi",
+            "year": "various",
+            "file": "files/hazrat_umar.pdf",
+            "image": "images/hazrat_umar.jpg"
+        },
+        {
+            "title": "Hukmdor",
+            "author": "Nikkolo Makiavelli",
+            "year": 1532,
+            "file": "files/hukmdor.pdf",
+            "image": "images/hukmdor.jpg"
+        },
+        {
+            "title": "Ichindagi ichindadur",
+            "author": "J. Rumiy",
+            "year": "various",
+            "file": "files/ichindagi_ichindadur.pdf",
+            "image": "images/ichindagi_ichindadur.jpg"
+        },
+        {
+            "title": "Ihyou Ulumid din",
+            "author": "Abu Homid G‘azzoliy",
+            "year": 1096,
+            "file": "files/ihyou_ulumid_din.pdf",
+            "image": "images/ihyou_ulumid_din.jpg"
+        },
+        {
+            "title": "Ijtimoiy odoblar",
+            "author": "SHayx Muhammad Sodiq Muhammad Yusuf",
+            "year": "various",
+            "file": "files/ijtimoiy_odoblar.pdf",
+            "image": "images/ijtimoiy_odoblar.jpg"
+        },
+        {
+            "title": "Ikki eshik orasi",
+            "author": "O'. Hoshimov",
+            "year": 1989,
+            "file": "files/ikki_eshik_orasi.pdf",
+            "image": "images/ikki_eshik_orasi.jpg"
+        },
+        {
+            "title": "Ilm olish sirlari",
+            "author": "Imom Zarnujiy",
+            "year": "various",
+            "file": "files/ilm_olish_sirlari.pdf",
+            "image": "images/ilm_olish_sirlari.jpg"
+        },
+        {
+            "title": "Ilon Mask",
+            "author": "Eshli Vens",
+            "year": 2015,
+            "file": "files/ilon_mask.pdf",
+            "image": "images/ilon_mask.jpg"
+        },
+        {
+            "title": "Imom Buxoriy Imom Muslim",
+            "author": "Muhammad Fuod Abdulboqiy",
+            "year": "various",
+            "file": "files/imom_buxoriy_imom_muslim.pdf",
+            "image": "images/imom_buxoriy_imom_muslim.jpg"
+        },
+        {
+            "title": "Imomning maneken qizi",
+            "author": "Omina Shenlikug'li",
+            "year": "various",
+            "file": "files/imomning_maneken_qizi.pdf",
+            "image": "images/imomning_maneken_qizi.jpg"
+        },
+        {
+            "title": "Iskanja",
+            "author": "Amina Shenliko'g'li",
+            "year": "various",
+            "file": "files/iskanja.pdf",
+            "image": "images/iskanja.jpg"
+        },
+        {
+            "title": "Izlash",
+            "author": "Mehmet Yildiz",
+            "year": "various",
+            "file": "files/izlash.pdf",
+            "image": "images/izlash.jpg"
+        },
+        {
+            "title": "Kafansiz Ko'milganlar",
+            "author": "Shukrullo",
+            "year": "various",
+            "file": "files/kafansiz_komilganlar.pdf",
+            "image": "images/kafansiz_komilganlar.jpg"
+        },
+        {
+            "title": "Kichkina Shahzoda",
+            "author": "Antuan de Sent-Ekzyuperi",
+            "year": 1943,
+            "file": "files/kichkina_shahzoda.pdf",
+            "image": "images/kichkina_shahzoda.jpg"
+        },
+        {
+            "title": "Kapitan Grant bolalari",
+            "author": "Jyul Vern",
+            "year": 1868,
+            "file": "files/kapitan_grant_bolalari.pdf",
+            "image": "images/kapitan_grant_bolalari.jpg"
+        },
+        {
+            "title": "Liderlik qonunlari",
+            "author": "T. Ruzvelt",
+            "year": "various",
+            "file": "files/liderlik_qonunlari.pdf",
+            "image": "images/liderlik_qonunlari.jpg"
+        },
+        {
+            "title": "Mahzun bo‘lma",
+            "author": "Shayx Oiz al-Qarniy",
+            "year": 2003,
+            "file": "files/mahzun_bolma.pdf",
+            "image": "images/mahzun_bolma.jpg"
+        },
+        {
+            "title": "Men Kim Sohibqiron Jahongir Temur",
+            "author": "Marsel Brion",
+            "year": 1942,
+            "file": "files/men_kim_sohibqiron_jahongir_temur.pdf",
+            "image": "images/men_kim_sohibqiron_jahongir_temur.jpg"
+        },
+        {
+            "title": "Men ham tafakkur qilaman",
+            "author": "Akmal Miravaz o‘g‘li",
+            "year": 2015,
+            "file": "files/men_ham_tafakkur_qilaman.pdf",
+            "image": "images/men_ham_tafakkur_qilaman.jpg"
+        },
+        {
+            "title": "Men va pul",
+            "author": "S. Davlatov",
+            "year": 2018,
+            "file": "files/men_va_pul.pdf",
+            "image": "images/men_va_pul.jpg"
+        }
+        ];
+
+        function searchBooks() {
+            const query = document.getElementById('search').value.toLowerCase();
+            const filteredBooks = books.filter(book => book.title.toLowerCase().includes(query));
+            displayBooks(filteredBooks);
+
+        }
+
+        function displayBooks(books) {
+            const booksDiv = document.getElementById('books');
+            booksDiv.innerHTML = '';
+            books.forEach(book => {
+                const bookDiv = document.createElement('div');
+                bookDiv.className = 'book';
+                bookDiv.innerHTML = `
+                    <img src="${book.image}" alt="${book.title}">
+                    <h2>${book.title}</h2>
+                    <p>${book.author}</p>
+                    <p>${book.year}</p>
+                    <a href="${book.file}" download="${book.title}">Yuklab olish</a>
+                `;
+                booksDiv.appendChild(bookDiv);
+            });
+        }
+
+        // Sayt yuklanganda barcha kitoblarni ko'rsatish
+        window.onload = function() {
+            displayBooks(books);
+        };
+    </script>
+</body>
+</html>
